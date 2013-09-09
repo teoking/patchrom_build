@@ -53,11 +53,8 @@ private-miui-apps := AntiSpam  \
 					 MiuiVideoPlayer \
 					 VpnDialogs \
 					 DataHubProvider \
-					 AirkanPhoneService
+					 AirkanPhoneService \
+					 AndoidPalace
 
-private-preinstall-apps := VoiceAssist  \
-					 GameCenter \
-					 Weather \
-					 InputMethod \
-					 AlipayMsp \
-					 MiuiVideo
+# Seems this variable has no actual usage
+private-preinstall-apps := 

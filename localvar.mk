@@ -72,8 +72,8 @@ ifeq ($(strip $(USE_ANDROID_OUT)),true)
     endif
 else
     USE_ANDROID_OUT := false
-    OUT_SYS_PATH := $(PORT_ROOT)/miui/system
-    OUT_DATA_PATH := $(PORT_ROOT)/miui/data
+    OUT_SYS_PATH := $(PORT_ROOT)/lerom/system
+    OUT_DATA_PATH := $(PORT_ROOT)/lerom/data
     REALLY_CLEAN :=
 endif
 PHONE_JARS := $(strip $(local-modified-jars))

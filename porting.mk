@@ -198,24 +198,24 @@ $(TMP_DIR)/framework-res.apk: $(TMP_DIR)/apktool-if $(framework-res-source-files
 	@echo "<<< build $@ completed!"
 
 # Target to build framework-miui-res.apk
-$(TMP_DIR)/framework-miui-res.apk: $(TMP_DIR)/framework-res.apk $(OUT_JAR_PATH)/framework-miui-res.apk
-	@echo ">>> build $@..."
-	$(hide) rm -rf $(TMP_DIR)/framework-miui-res
-	$(APKTOOL) d -f $(OUT_JAR_PATH)/framework-miui-res.apk $(TMP_DIR)/framework-miui-res
-	$(hide) rm -rf $(TMP_DIR)/framework-miui-res/res
-	$(hide) cp -r $(MIUI_RES_DIR) $(TMP_DIR)/framework-miui-res
-	$(hide) for dir in `ls -d $(OVERLAY_MIUI_RES_DIR)/[^v]*`; do\
-          cp -r $$dir $(TMP_DIR)/framework-miui-res/res; \
-        done
-	$(hide) for dir in `ls -d $(OVERLAY_MIUI_RES_DIR)/values*`; do\
-		$(MERGY_RES) $$dir $(TMP_DIR)/framework-miui-res/res/`basename $$dir`; \
-	done
-	@echo "  - 2" >> $(TMP_DIR)/framework-miui-res/apktool.yml
-	@echo "  - 3" >> $(TMP_DIR)/framework-miui-res/apktool.yml
-	@echo "  - 4" >> $(TMP_DIR)/framework-miui-res/apktool.yml
-	@echo "  - 5" >> $(TMP_DIR)/framework-miui-res/apktool.yml
-	$(APKTOOL) b $(TMP_DIR)/framework-miui-res $@
-	@echo "<<< build $@ completed!"
+#$(TMP_DIR)/framework-miui-res.apk: $(TMP_DIR)/framework-res.apk $(OUT_JAR_PATH)/framework-miui-res.apk
+#	@echo ">>> build $@..."
+#	$(hide) rm -rf $(TMP_DIR)/framework-miui-res
+#	$(APKTOOL) d -f $(OUT_JAR_PATH)/framework-miui-res.apk $(TMP_DIR)/framework-miui-res
+#	$(hide) rm -rf $(TMP_DIR)/framework-miui-res/res
+#	$(hide) cp -r $(MIUI_RES_DIR) $(TMP_DIR)/framework-miui-res
+#	$(hide) for dir in `ls -d $(OVERLAY_MIUI_RES_DIR)/[^v]*`; do\
+#          cp -r $$dir $(TMP_DIR)/framework-miui-res/res; \
+#        done
+#	$(hide) for dir in `ls -d $(OVERLAY_MIUI_RES_DIR)/values*`; do\
+#		$(MERGY_RES) $$dir $(TMP_DIR)/framework-miui-res/res/`basename $$dir`; \
+#	done
+#	@echo "  - 2" >> $(TMP_DIR)/framework-miui-res/apktool.yml
+#	@echo "  - 3" >> $(TMP_DIR)/framework-miui-res/apktool.yml
+#	@echo "  - 4" >> $(TMP_DIR)/framework-miui-res/apktool.yml
+#	@echo "  - 5" >> $(TMP_DIR)/framework-miui-res/apktool.yml
+#	$(APKTOOL) b $(TMP_DIR)/framework-miui-res $@
+#	@echo "<<< build $@ completed!"
 
 #
 # To prepare the workspace to modify the APKs from zip file
@@ -297,8 +297,10 @@ $(foreach app, $(APPS) $(MIUIAPPS_MOD), \
 $(foreach app, $(MIUIAPPS), \
 	$(eval $(call SIGN_template,$(OUT_APK_PATH)/$(app).apk,/system/app/$(app).apk)))
 
-$(eval $(call SIGN_template,$(TMP_DIR)/framework-miui-res.apk,/system/framework/framework-miui-res.apk))
+# TODO. Comment out by teok. We have no miui-res apk now.
+#$(eval $(call SIGN_template,$(TMP_DIR)/framework-miui-res.apk,/system/framework/framework-miui-res.apk))
 
+# TODO. Comment out by teok.
 $(eval $(call SIGN_template,$(TMP_DIR)/framework-res.apk,/system/framework/framework-res.apk))
 
 $(foreach app, $(MIUIAPPS) $(MIUIAPPS_MOD), $(eval $(call BUILD_CLEAN_APP_template,$(app))))
@@ -359,7 +361,7 @@ RELEASE_MIUI += release-miui-prebuilt
 endif
 	
 target_files: | $(ZIP_DIR)
-target_files: $(TMP_DIR)/framework-miui-res.apk $(ZIP_BLDJARS) $(TOZIP_APKS) add-miui-prebuilt $(ACT_PRE_ZIP)
+target_files: $(ZIP_BLDJARS) $(TOZIP_APKS) $(ACT_PRE_ZIP)
 
 # Target to make zipfile which is all signed by testkey. convenient for developement and debug
 zipfile: BUILD_NUMBER := zipfile.$(ROM_BUILD_NUMBER)
