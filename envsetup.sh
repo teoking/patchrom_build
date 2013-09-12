@@ -79,4 +79,4 @@ if [ -n "$PORT_ROOT" ]; then
 fi
 
 # my build fix
-export PATH=/home/teo/bin:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/home/teo/android-ndk-r8b:/home/teo/Work/patchrom/tools:/home/teo/android-ndk-r8b:/home/teo/android-sdk-linux/platform-tools:/home/teo/android-sdk-linux/tools
+#export PATH=/home/teo/bin:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/home/teo/android-ndk-r8b:/home/teo/Work/patchrom/tools:/home/teo/android-ndk-r8b:/home/teo/android-sdk-linux/platform-tools:/home/teo/android-sdk-linux/tools
