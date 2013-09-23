@@ -1,6 +1,6 @@
 add-prebuilt-app: $(ZIP_DIR)/system/xbin/busybox
 	@echo To add prebuilt apps
-	$(hide) cp -f $(SYSOUT_DIR)/xbin/shelld $(ZIP_DIR)/system/xbin/
+	#$(hide) cp -f $(SYSOUT_DIR)/xbin/shelld $(ZIP_DIR)/system/xbin/
 	$(hide) mkdir -p $(ZIP_DIR)/data/media
 	$(hide) cp -rf $(DATAOUT_DIR)/media/preinstall_apps/ $(ZIP_DIR)/data/media/
 
@@ -12,8 +12,8 @@ add-prebuilt-libraries:
 	$(hide) cp -f $(SYSOUT_DIR)/lib/content-types.properties $(ZIP_DIR)/system/lib/
 	$(hide) cp -f $(SYSOUT_DIR)/lib/libffmpeg_xm.so $(ZIP_DIR)/system/lib/
 	$(hide) cp -f $(SYSOUT_DIR)/lib/libffplayer_jni.so $(ZIP_DIR)/system/lib/
-	#$(hide) cp -f $(SYSOUT_DIR)/framework/miui-framework.jar $(ZIP_DIR)/system/framework/
-	#$(hide) cp -f $(SYSOUT_DIR)/lib/libjni_latinime.so $(ZIP_DIR)/system/lib/
+	$(hide) cp -f $(SYSOUT_DIR)/framework/miui-framework.jar $(ZIP_DIR)/system/framework/
+	$(hide) cp -f $(SYSOUT_DIR)/lib/libjni_latinime.so $(ZIP_DIR)/system/lib/
 	$(hide) cp -f $(SYSOUT_DIR)/lib/liblocSDK_*.so $(ZIP_DIR)/system/lib/
 	$(hide) cp -f $(SYSOUT_DIR)/lib/libjni_resource_drm.so $(ZIP_DIR)/system/lib/
 	$(hide) cp -f $(SYSOUT_DIR)/lib/libjni_resource_patcher.so $(ZIP_DIR)/system/lib/
@@ -39,17 +39,18 @@ add-prebuilt-etc-files:
 	$(hide) cp -rf $(SYSOUT_DIR)/etc/license/ $(ZIP_DIR)/system/etc/
 	$(hide) cp -f $(SYSOUT_DIR)/etc/yellowpage.db $(ZIP_DIR)/system/etc/
 	$(hide) cp -f $(SYSOUT_DIR)/etc/telocation.idf $(ZIP_DIR)/system/etc/
-	#$(hide) cp -f $(SYSOUT_DIR)/etc/permissions/miui-framework.xml $(ZIP_DIR)/system/etc/permissions/
-	#$(hide) cp -f $(SYSOUT_DIR)/etc/unicode_py_index.td $(ZIP_DIR)/system/etc/
+	$(hide) cp -f $(SYSOUT_DIR)/etc/permissions/miui-framework.xml $(ZIP_DIR)/system/etc/permissions/
+	$(hide) cp -f $(SYSOUT_DIR)/etc/unicode_py_index.td $(ZIP_DIR)/system/etc/
 	$(hide) cp -f $(SYSOUT_DIR)/etc/pinyinindex.idf $(ZIP_DIR)/system/etc/
 	$(hide) cp -f $(SYSOUT_DIR)/etc/weather_city.db $(ZIP_DIR)/system/etc/
 	$(hide) cp -f $(SYSOUT_DIR)/etc/permission_config.json $(ZIP_DIR)/system/etc/
 
 add-lbesec-miui:
 	@echo To add LBESEC_MIUI
-	$(hide) cp -f $(SYSOUT_DIR)/lib/liblbesec.so $(ZIP_DIR)/system/lib/
-	$(hide) cp -f $(SYSOUT_DIR)/bin/installd $(ZIP_DIR)/system/bin
-	$(hide) cp -f $(SYSOUT_DIR)/app/LBESEC_MIUI.apk $(ZIP_DIR)/system/app
+	# TODO by teoking.
+	#$(hide) cp -f $(SYSOUT_DIR)/lib/liblbesec.so $(ZIP_DIR)/system/lib/
+	#$(hide) cp -f $(SYSOUT_DIR)/bin/installd $(ZIP_DIR)/system/bin
+	#$(hide) cp -f $(SYSOUT_DIR)/app/LBESEC_MIUI.apk $(ZIP_DIR)/system/app
 	$(hide) cp -f $(SYSOUT_DIR)/xbin/su $(ZIP_DIR)/system/xbin/
 
 add-skia-emoji:
@@ -125,8 +126,11 @@ release-miui-resources:
 	$(hide) cd $(ANDROID_TOP); tar -cf $(RELEASE_PATH)/src/res.tar packages/apps/*/res
 	$(hide) cd $(RELEASE_PATH)/src;tar -xf res.tar;rm res.tar
 
-add-miui-prebuilt: add-prebuilt-app add-prebuilt-libraries add-prebuilt-media add-prebuilt-etc-files add-lbesec-miui
+# TODO by teoking. comment out prebuilt stuff.
+#add-miui-prebuilt: add-prebuilt-app add-prebuilt-libraries add-prebuilt-media add-prebuilt-etc-files add-lbesec-miui
+add-miui-prebuilt: add-prebuilt-app add-prebuilt-media add-lbesec-miui
 	@echo Add miui prebuilt completed!
 
-release-miui-prebuilt: release-prebuilt-app release-prebuilt-libraries release-prebuilt-media release-prebuilt-etc-files release-miui-resources
+#release-miui-prebuilt: release-prebuilt-app release-prebuilt-libraries release-prebuilt-media release-prebuilt-etc-files release-miui-resources
+release-miui-prebuilt: release-prebuilt-media
 	@echo Release MIUI prebuilt completed!

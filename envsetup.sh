@@ -64,7 +64,7 @@ else
        return
    fi
 fi
-export PATH=$PORT_ROOT/tools:$PATH
+export PATH=$PATH:$PORT_ROOT/tools
 
 if [ -n "$PORT_ROOT" ]; then
     PORT_BUILD=$PORT_ROOT/build

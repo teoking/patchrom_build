@@ -42,14 +42,14 @@ ROM_BUILD_NUMBER  := $(shell date +%Y%m%d.%H%M%S)
 ifeq ($(USE_ANDROID_OUT),true)
     MIUI_SRC_DIR:=$(ANDROID_TOP)
 else
-    MIUI_SRC_DIR:=$(PORT_ROOT)/miui/src
+    MIUI_SRC_DIR:=$(PORT_ROOT)/lerom/src
 endif
-MIUI_OVERLAY_RES_DIR:=$(MIUI_SRC_DIR)/frameworks/miui/overlay/frameworks/base/core/res/res
-MIUI_RES_DIR:=$(MIUI_SRC_DIR)/frameworks/miui/core/res/res
+MIUI_OVERLAY_RES_DIR:=$(MIUI_SRC_DIR)/frameworks/lerom/overlay/frameworks/base/core/res/res
+MIUI_RES_DIR:=$(MIUI_SRC_DIR)/frameworks/lerom/core/res/res
 OVERLAY_RES_DIR:=overlay/framework-res/res
 OVERLAY_MIUI_RES_DIR:=overlay/framework-miui-res/res
 
-MIUI_JARS   := services android.policy framework framework2
+MIUI_JARS   := services android.policy framework
 JARS        := $(MIUI_JARS) $(PHONE_JARS)
 BLDAPKS     := $(addprefix $(TMP_DIR)/,$(addsuffix .apk,$(APPS)))
 JARS_OUTDIR := $(addsuffix .jar.out,$(MIUI_JARS))
@@ -63,7 +63,7 @@ TOZIP_APKS  :=
 CLEANJAR    :=
 CLEANMIUIAPP:=
 RELEASE_MIUI:=
-RELEASE_PATH:= $(PORT_ROOT)/miui
+RELEASE_PATH:= $(PORT_ROOT)/lerom
 MAKE_ATTOP  := make -C $(ANDROID_TOP)
 
 # helper functions
@@ -137,6 +137,7 @@ $(TMP_DIR)/$(1).jar-phone:$(TMP_DIR)/$(1).jar
 	$(ADB) push $$< /system/framework/$(1).jar
 
 $(TMP_DIR)/$(1).jar-tozip:$(TMP_DIR)/$(1).jar
+	@echo $(ZIP_DIR)/system/framework/$(1).jar
 	$(hide) cp $$< $(ZIP_DIR)/system/framework/$(1).jar
 	@touch $$@
 
@@ -174,7 +175,7 @@ endif
 
 $(3): $(OUT_APK_PATH)/$(1).apk
 	$(hide) rm -rf $(3)
-	$(APKTOOL) d -t miui -f $(OUT_APK_PATH)/$(1).apk $(3)
+	$(APKTOOL) d -t lerom -f $(OUT_APK_PATH)/$(1).apk $(3)
 	$(hide) sed -i "/tag:/d" $(3)/apktool.yml
 	$(PATCH_MIUI_APP) $(2) $(3)
 
@@ -309,7 +310,7 @@ $(foreach app, $(APPS) $(MIUIAPPS_MOD), \
 $(foreach app, $(MIUIAPPS), \
 	$(eval $(call SIGN_template,$(OUT_APK_PATH)/$(app).apk,/system/app/$(app).apk)))
 
-$(eval $(call SIGN_template,$(TMP_DIR)/framework-miui-res.apk,/system/framework/framework-miui-res.apk))
+#$(eval $(call SIGN_template,$(TMP_DIR)/framework-miui-res.apk,/system/framework/framework-miui-res.apk))
 
 $(eval $(call SIGN_template,$(TMP_DIR)/framework-res.apk,/system/framework/framework-res.apk))
 
@@ -374,7 +375,9 @@ RELEASE_MIUI += release-miui-prebuilt
 endif
 	
 target_files: | $(ZIP_DIR)
-target_files: $(TMP_DIR)/framework-miui-res.apk $(ZIP_BLDJARS) $(TOZIP_APKS) add-miui-prebuilt $(ACT_PRE_ZIP)
+# TODO. By teoking. We donot need miui-res.apk now.
+#target_files: $(TMP_DIR)/framework-miui-res.apk $(ZIP_BLDJARS) $(TOZIP_APKS) add-miui-prebuilt $(ACT_PRE_ZIP)
+target_files: $(ZIP_BLDJARS) $(TOZIP_APKS) add-miui-prebuilt $(ACT_PRE_ZIP)
 
 # Target to make zipfile which is all signed by testkey. convenient for developement and debug
 zipfile: BUILD_NUMBER := 01.$(ROM_BUILD_NUMBER)

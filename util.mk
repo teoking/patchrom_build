@@ -40,9 +40,10 @@ $(TMP_DIR)/apktool-if: $(ZIP_FILE) $(APKTOOL_IF_RESULT_FILE)/6.apk | $(TMP_DIR)
 	$(hide) for res_file in `find $(PORT_BUILD)/res/ -name "*.apk"`;do\
 		$(APKTOOL) if $$res_file; \
 	done
+	# TODO. By teoking. Only comment out the miui-res.apk to make build pass.
 	@echo install framework-miui-res.apk
-	$(APKTOOL) if $(SYSOUT_DIR)/framework/framework-miui-res.apk
-	$(APKTOOL) if $(SYSOUT_DIR)/framework/framework-res.apk miui
+	#$(APKTOOL) if $(SYSOUT_DIR)/framework/framework-miui-res.apk
+	#$(APKTOOL) if $(SYSOUT_DIR)/framework/framework-res.apk miui
 	$(UNZIP) $(ZIP_FILE) "system/framework/*.apk" -d $(TMP_DIR)
 	$(hide) for res_file in `find $(TMP_DIR)/system/framework/ -name "*.apk"`; do\
 		echo install $$res_file ; \
@@ -121,6 +122,7 @@ verify: $(ERR_REPORT)
 	@echo "local-zip-file        = $(local-zip-file)"
 	@echo "local-out-zip-file    = $(local-out-zip-file)"
 	@echo "local-modified-apps   = $(local-modified-apps)"
+	@echo "local-modified-jars   = $(local-modified-jars)"
 	@echo "local-miui-apps       = $(local-miui-apps)"
 	@echo "local-remove-apps     = $(local-remove-apps)"
 	@echo "local-phone-apps      = $(local-phone-apps)"
