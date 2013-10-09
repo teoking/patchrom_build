@@ -1,0 +1,54 @@
+private-miui-apps := AmlSettings \
+                   ApplicationsProvider \
+                   BackupRestoreConfirmation \
+                   Bluetooth \
+                   Browser \
+                   CertInstaller \
+                   DefaultContainerService \
+                   doubanfm \
+                   DownloadProvider \
+                   DrmProvider \
+                   FusedLocation \
+                   GlobalSetting \
+                   GreatWisdom \
+                   HTMLViewer \
+                   InputDevices \
+                   KeyChain \
+                   LetvAccount \
+                   LetvAirplay \
+                   LetvBoxTV \
+                   LetvCloudGallery \
+                   LetvCNTV \
+                   LetvDmr \
+                   LetvDownloadManager \
+                   LetvFileManager \
+                   LetvGallery \
+                   LetvGuideScreenInfo \
+                   LetvLeso \
+                   letvmarket \
+                   LetvMediaCenter \
+                   LetvMultiScreen \
+                   LetvPinyinIME \
+                   LetvWeather \
+                   LiveWallpapersPicker \
+                   MediaProvider \
+                   MessageCenter \
+                   PackageInstaller \
+                   PicoTts \
+                   Provision \
+                   QRCode \
+                   SettingsProvider \
+                   SharedStorageBackup \
+                   SystemUI \
+                   SystemUpgrade \
+                   T2Launcher \
+                   ThreeScreenEngine \
+                   TVStatus \
+                   UserDictionaryProvider \
+                   VideoHistory \
+                   VideoPlayer \
+                   VoiceAssistant \
+                   VpnDialogs \
+                   XiamiMusic
+
+private-preinstall-apps := 
