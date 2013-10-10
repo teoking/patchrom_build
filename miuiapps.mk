@@ -12,5 +12,6 @@ private-miui-apps := AmlSettings \
                    LetvPinyinIME \
                    LetvWeather \
                    T2Launcher \
+                   SystemUI
 
 private-preinstall-apps := 
